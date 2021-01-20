@@ -1,0 +1,23 @@
+version: '2'
+services:
+  grails:
+    image: vaidegrails/grails:latest
+    command: tail -f /dev/null
+    volumes:
+      - ~/.m2:/home/developer/.m2
+      - ~/.gradle:/home/developer/.gradle
+      - ~/.grails:/home/developer/.grails
+      - ~/.ssh/:/home/developer/.ssh
+      - ~/git/:/home/developer/git
+    ports:
+      - "8888:8080" #Grails default port mapped to my local port 8888
+      - "5005:5005" #Grails debug port mapped to my local port 5005
+    links:
+      - db
+  db:
+    image: postgres:9.6
+    ports:
+      - "7777:5432" #Postgres default port mapped to my local port 5432
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
