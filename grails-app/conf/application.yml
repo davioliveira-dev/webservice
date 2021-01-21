@@ -69,6 +69,13 @@ grails:
         defaultScope: singleton
     converters:
         encoding: UTF-8
+    plugin.springsecurity.rest.token.storage.jwt.secret: "n2r5u8x/A%D*G-KaPdSgVkYp3s6v9y$B&E(H+MbQeThWmZq4t7w!z%C*F-J@NcRf"
+    plugin.springsecurity.rest.token.storage.jwt.useEncryptedJwt: true
+    plugin.springsecurity.rest.token.validation.enableAnonymousAccess: true
+    plugin.springsecurity.rest.token.validation.useBearerToken: true
+    plugin.springsecurity.rest.filterChain.chainMap: [
+        [pattern: '/listaRegistroEntradaPlaca', filters: 'JOINED_FILTERS,-anonymousAuthenticationFilter,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter']
+    ]
 
 ---
 hibernate:
@@ -82,8 +89,8 @@ dataSource:
     pooled: true
     jmxExport: true
     logSql: true
-    driverClassName: 'org.postgresql.Driver'
     dialect: org.hibernate.dialect.PostgreSQLDialect
+    driverClassName: 'org.postgresql.Driver'
     username: 'postgres'
     password: 'postgres'
 

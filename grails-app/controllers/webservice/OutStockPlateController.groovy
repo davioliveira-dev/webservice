@@ -5,7 +5,7 @@ import grails.rest.*
 import grails.converters.*
 import org.springframework.security.access.annotation.Secured
 
-@Secured('isAuthenticated()')
+@Secured("ROLE_USER")
 class OutStockPlateController extends RestfulController implements RestResponder {
 	static responseFormats = ['json', 'xml']
 

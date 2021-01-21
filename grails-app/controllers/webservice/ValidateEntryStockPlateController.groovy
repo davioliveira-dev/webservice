@@ -1,10 +1,9 @@
 package webservice
 
 import grails.artefact.controller.RestResponder
+import grails.plugin.springsecurity.rest.token.bearer.BearerTokenReader
 import grails.rest.*
-import org.springframework.security.access.annotation.Secured
 
-@Secured('isAuthenticated()')
 class ValidateEntryStockPlateController extends RestfulController implements RestResponder {
 	static responseFormats = ['json', 'xml']
 
