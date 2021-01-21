@@ -1,23 +1,47 @@
-version: '2'
+version: '3.7'
+
 services:
-  grails:
-    image: vaidegrails/grails:latest
-    command: tail -f /dev/null
-    volumes:
-      - ~/.m2:/home/developer/.m2
-      - ~/.gradle:/home/developer/.gradle
-      - ~/.grails:/home/developer/.grails
-      - ~/.ssh/:/home/developer/.ssh
-      - ~/git/:/home/developer/git
-    ports:
-      - "8888:8080" #Grails default port mapped to my local port 8888
-      - "5005:5005" #Grails debug port mapped to my local port 5005
-    links:
-      - db
   db:
-    image: postgres:9.6
-    ports:
-      - "7777:5432" #Postgres default port mapped to my local port 5432
+    image: postgres:12.3
     environment:
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=webservice
       - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
+    networks:
+      - mynetwork
+
+  backend:
+    build:
+      context: .
+      target: development
+    ports:
+      - 8080:8080
+      - 8083:8443
+      - 5006:5005
+    environment:
+      - DB_HOST=db
+      - DB_NAME=webservice
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+    volumes:
+      - grails-volume:/root/.m2
+      - grails-volume:/root/.gradle
+      - grails-volume:/root/.grails
+      - ./grails-app:/app/grails-app
+      - ./src:/app/src
+      - ./version.txt:/version.txt
+    entrypoint: ["sh", "-c", "./wait-for-it.sh db:5432 -t 30 -- grails run-app"]
+    command: [""]
+    depends_on:
+      - db
+    networks:
+      - mynetwork
+
+volumes:
+  grails-volume:
+
+networks:
+  mynetwork:

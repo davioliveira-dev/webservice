@@ -51,10 +51,10 @@ grails:
               - text/json   
             hal:
               - application/hal+json
-              - application/hal+xml  
+              - application/hal+xml
             xml:
               - text/xml
-              - application/xml                                 
+              - application/xml
             atom: application/atom+xml
             css: text/css
             csv: text/csv
@@ -83,6 +83,7 @@ dataSource:
     jmxExport: true
     logSql: true
     driverClassName: 'org.postgresql.Driver'
+    dialect: org.hibernate.dialect.PostgreSQLDialect
     username: 'postgres'
     password: 'postgres'
 
@@ -90,14 +91,17 @@ environments:
     development:
         dataSource:
             dbCreate: create-drop
+            #url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
             url: 'jdbc:postgresql://localhost:5432/webservice'
     test:
         dataSource:
             dbCreate: update
+            #url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
             url: 'jdbc:postgresql://localhost:5432/webservice'
     production:
         dataSource:
             dbCreate: none
+            #url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
             url: 'jdbc:postgresql://localhost:5432/webservice'
             properties:
                 jmxEnabled: true

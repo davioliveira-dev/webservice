@@ -3,7 +3,9 @@ package webservice
 import grails.artefact.controller.RestResponder
 import grails.rest.*
 import grails.converters.*
+import org.springframework.security.access.annotation.Secured
 
+@Secured('isAuthenticated()')
 class OutStockPlateController extends RestfulController implements RestResponder {
 	static responseFormats = ['json', 'xml']
 
