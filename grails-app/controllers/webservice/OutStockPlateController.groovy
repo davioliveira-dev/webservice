@@ -5,7 +5,7 @@ import grails.rest.*
 import grails.converters.*
 import org.springframework.security.access.annotation.Secured
 
-@Secured("ROLE_USER")
+@Secured(["IS_AUTHENTICATED_ANONYMOUSLY"])
 class OutStockPlateController extends RestfulController implements RestResponder {
 	static responseFormats = ['json', 'xml']
 
@@ -16,10 +16,14 @@ class OutStockPlateController extends RestfulController implements RestResponder
     OutStockPlateService outStockPlateService = new OutStockPlateService()
 
     def index() {
+        AuthMiddleware.hasValidToken(request, response)
+
         respond outStockPlateService.getOutStockPlates()
     }
 
     def create(OutStockPlate outStockPlate) {
+        AuthMiddleware.hasValidToken(request, response)
+
         String type = outStockPlate.type
         Integer quantity = outStockPlate.quantity
         String numbering = outStockPlate.numbering

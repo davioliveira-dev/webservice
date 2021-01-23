@@ -3,7 +3,7 @@ package webservice
 class UrlMappings {
 
     static mappings = {
-        get "/listaRegistroEntradaPlaca"(controller: "ValidateEntryStockPlate", action: "index", filters: "ANONYMOUS_FILTERS")
+        get "/listaRegistroEntradaPlaca"(controller: "ValidateEntryStockPlate", action: "index")
         post "/registraEntradaPlaca"(controller: "ValidateEntryStockPlate", action: "create")
         get "/listaRegistroSaidaPlaca"(controller: "OutStockPlate", action: "index")
         post "/registraSaidaPlaca"(controller: "OutStockPlate", action: "create")

@@ -1,9 +1,11 @@
 package webservice
 
 import grails.artefact.controller.RestResponder
-import grails.plugin.springsecurity.rest.token.bearer.BearerTokenReader
+import grails.plugin.springsecurity.annotation.Secured
 import grails.rest.*
+import groovy.json.JsonSlurper
 
+@Secured(["IS_AUTHENTICATED_ANONYMOUSLY"])
 class ValidateEntryStockPlateController extends RestfulController implements RestResponder {
 	static responseFormats = ['json', 'xml']
 
@@ -14,10 +16,14 @@ class ValidateEntryStockPlateController extends RestfulController implements Res
     EntryStockPlateService entryStockPlateService = new EntryStockPlateService()
 
     def index() {
+        AuthMiddleware.hasValidToken(request, response)
+
         respond entryStockPlateService.getEntryStockPlates()
     }
 
     def create(EntryStockPlate entryStockPlate) {
+        AuthMiddleware.hasValidToken(request, response)
+
         String type = entryStockPlate.type
         Integer quantity = entryStockPlate.quantity
 

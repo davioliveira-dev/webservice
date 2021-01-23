@@ -10,3 +10,8 @@ out/
 .project
 .settings
 .classpath
+*.class
+*.log
+output/
+build/
+target/
