@@ -3,7 +3,6 @@ package webservice
 import grails.artefact.controller.RestResponder
 import grails.plugin.springsecurity.annotation.Secured
 import grails.rest.*
-import groovy.json.JsonSlurper
 
 @Secured(["IS_AUTHENTICATED_ANONYMOUSLY"])
 class ValidateEntryStockPlateController extends RestfulController implements RestResponder {

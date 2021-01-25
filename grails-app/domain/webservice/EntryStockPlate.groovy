@@ -3,7 +3,6 @@ package webservice
 import org.grails.datastore.gorm.GormEntity
 
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class EntryStockPlate implements GormEntity<EntryStockPlate> {

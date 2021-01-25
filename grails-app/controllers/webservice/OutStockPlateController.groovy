@@ -2,7 +2,6 @@ package webservice
 
 import grails.artefact.controller.RestResponder
 import grails.rest.*
-import grails.converters.*
 import org.springframework.security.access.annotation.Secured
 
 @Secured(["IS_AUTHENTICATED_ANONYMOUSLY"])
